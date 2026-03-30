@@ -34,12 +34,12 @@ In actual use, these functions should be provided by L10nUtils via #Include.
 https://github.com/SevenKeyboard/l10n-utils/blob/main-ahkv1.1/lib/L10nUtils.ahk
 */
 ;@I18n-IgnoreBegin
-__(text, domain := "default")    {
+__(byRef text, domain := "default")    {
 }
-_n(single, plural, num, domain := "default")    {
+_n(byRef single, byRef plural, num, domain := "default")    {
 }
-_x(text, context, domain := "default")    {
+_x(byRef text, context, domain := "default")    {
 }
-_nx(single, plural, num, context, domain := "default")    {
+_nx(byRef single, byRef plural, num, context, domain := "default")    {
 }
 ;@I18n-IgnoreEnd
