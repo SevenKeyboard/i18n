@@ -498,6 +498,7 @@ msgstr """"
             for _,spec in includeSpecs
             {
                 path := ""
+                spec := strReplace(spec, "``;", ";")
                 if (regExMatch(spec, "O)\A<(.+)>\z", m))    {
                     libName := regExReplace(m[2], "i)\A\*i[ `t]")
                     path := this._resolveLibIncludeSpec(libName, ctx)

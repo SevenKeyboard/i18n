@@ -490,6 +490,7 @@ msgstr `"`"
             for spec in includeSpecs
             {
                 path := ""
+                spec := strReplace(spec, "``;", ";")
                 if (regExMatch(spec, "\A([`"']?)<(.+)>\g{1}\z", &m))    {
                     libName := regExReplace(m[2], "i)\A\*i[ `t]")
                     path := this._resolveLibIncludeSpec(libName, ctx)
