@@ -308,7 +308,7 @@ msgstr """"
                         continue
                     }
                     if (currChar == stringQuoteChar)    {
-                        nextChar := subStr(A_LoopField, A_Index, 1)
+                        nextChar := subStr(currLine, A_Index + 1, 1)
                         if (nextChar == stringQuoteChar)    {
                             skipNextChar := true
                             maskedLine .= A_Space
@@ -545,7 +545,7 @@ msgstr """"
         prevStringCaseSense := A_StringCaseSense
         stringCaseSense % "On"
         try  {
-            tp := m[2]
+            tp := strReplace(m[2], """""", """")
             out := ""
             spo := 1
             while (regExMatch(tp, "O)``(.)", m, spo))    {
