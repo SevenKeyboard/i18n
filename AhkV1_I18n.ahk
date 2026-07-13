@@ -106,7 +106,8 @@ class AhkV1_I18n
             ,rootScriptName:rootScriptName
             ,rootScriptDir:rootScriptDir}
         state := {visitedPaths:object()
-            ,messagesByKey:object()}
+            ,messagesByKey:object()
+            ,messagesInOrder:[]}
         prevIsCritical := A_IsCritical
         critical % "On"
         try  {
@@ -144,7 +145,7 @@ class AhkV1_I18n
     ;---------------------------------------------------------------------
     _buildMessagesByDomain(state)    {
         messagesByDomain := object()
-        for _,message in state.messagesByKey    {
+        for _,message in state.messagesInOrder    {
             domainName := message.domain
             if (!messagesByDomain.hasKey(domainName))
                 messagesByDomain[domainName] := []
@@ -479,6 +480,7 @@ msgstr """"
                             state.messagesByKey[msgKey].msgctxt     := context
                             state.messagesByKey[msgKey].domain      := domain
                     }
+                    state.messagesInOrder.push(state.messagesByKey[msgKey])
                 }
                 refKey := scriptFullPath . "#L" . lineNumber
                 if (!state.messagesByKey[msgKey]._referenceKeys.hasKey(refKey))    {

@@ -102,7 +102,8 @@ class AhkV2_I18n
             ,rootScriptName:rootScriptName
             ,rootScriptDir:rootScriptDir}
         state := {visitedPaths:Map()
-            ,messagesByKey:Map()}
+            ,messagesByKey:Map()
+            ,messagesInOrder:[]}
         state.visitedPaths.CaseSense    := false
         state.messagesByKey.CaseSense   := true
         prevIsCritical := critical("On")
@@ -140,7 +141,7 @@ class AhkV2_I18n
     static _buildMessagesByDomain(state)    {
         messagesByDomain := Map()
         messagesByDomain.CaseSense := false
-        for _,message in state.messagesByKey    {
+        for message in state.messagesInOrder    {
             domainName := message.domain
             if (!messagesByDomain.has(domainName))
                 messagesByDomain[domainName] := []
@@ -471,6 +472,7 @@ msgstr `"`"
                             state.messagesByKey[msgKey].msgctxt     := context
                             state.messagesByKey[msgKey].domain      := domain
                     }
+                    state.messagesInOrder.push(state.messagesByKey[msgKey])
                 }
                 refKey := scriptFullPath . "#L" . lineNumber
                 if (!state.messagesByKey[msgKey]._referenceKeys.has(refKey))    {
